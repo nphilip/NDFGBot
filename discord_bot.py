@@ -1,6 +1,14 @@
+# Non-Degenerate Friend Group Discord Bot
+
+# Initializations
+import discord # Obviously, as a Discord Bot, an include is necessary for that portion
+import os # Required for pulling environment variables
+
+# References
 # https://github.com/Rapptz/discord.py/blob/async/examples/reply.py
-import discord
-import os
+
+# Switches
+debug = True # Enables verbose outputs for diagnostics.
 
 client = discord.Client()
 tohangup = ""
@@ -18,16 +26,19 @@ async def on_message(message):
             if(currentchannel.name == "Admiral"):
               chanelid = currentchannel.id
               channeltoremove = currentchannel
-
         await client.delete_channel(channeltoremove)
         await client.create_channel(message.server, 'Admiral', type=discord.ChannelType.voice)
         msg = ('Good night. All users have been removed from Admiral.').format(message)
         msg = msg.format(message)
         await client.send_message(message.channel, msg)
 
-    elif message.content.startswith('!test-new'): # New code using rewrite branch method
+    elif message.content.startswith('!test-new'): # Test code using rewrite branch method
             with message.channel.typing():
                 await message.channel.send('Message written using message.channel.send')
+
+    elif message.content.startswith('!phil-lightsoff):') # WIP - Turn off Phil's lights
+            await message.channel.send('Sending lights off command to LIFX bulbs @ Phil')
+
     elif message.content.startswith('!add'):
         member = message.mentions[0]
         msg = ('Adding %s to the priority' % member)
