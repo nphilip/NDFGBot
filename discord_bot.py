@@ -28,11 +28,6 @@ async def on_message(message):
     elif message.content.startswith('!test-new'): # New code using rewrite branch method
             with message.channel.typing():
                 await message.channel.send('Message written using message.channel.send')
-
-    elif message.content.startswith('!lightsoff'): # LIFX Test Implementation
-            with message.channel.typing():
-                   
-
     elif message.content.startswith('!add'):
         member = message.mentions[0]
         msg = ('Adding %s to the priority' % member)
