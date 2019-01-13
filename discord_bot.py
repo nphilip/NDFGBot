@@ -2,9 +2,7 @@
 import discord
 import os
 
-TOKEN = os.environ.get('DISCORD_BOT_KEY')
-
-# NO HARDCODED TOKENS, LILY.
+TOKEN = os.environ.get('DISCORD_BOT_KEY') # NO HARDCODED TOKENS, LILY.
 client = discord.Client()
 tohangup = ""
 
@@ -27,6 +25,11 @@ async def on_message(message):
         msg = ('Good night. All users have been removed from Admiral.').format(message)
         msg = msg.format(message)
         await client.send_message(message.channel, msg)
+
+    elif message.content.startswith('!test-new'): # New code using rewrite branch method
+            with message.channel.typing():
+                await message.channel.send('Message written using message.channel.send')   
+
     elif message.content.startswith('!add'):
         member = message.mentions[0]
         msg = ('Adding %s to the priority' % member)
