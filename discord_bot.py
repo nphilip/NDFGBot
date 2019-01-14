@@ -3,7 +3,7 @@
 # Initializations
 import discord # Obviously, as a Discord Bot, an include is necessary for that portion
 import os # Required for pulling environment variables
-import httplib, urllib # Required for building POST requests
+import requests # Required for building POST requests
 
 # References
 # https://github.com/Rapptz/discord.py/blob/async/examples/reply.py
@@ -43,13 +43,11 @@ async def on_message(message):
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
             headers = {'x-profile-secret': Telnyx_SMS_Key, 'Content-Type':'application/json'}
-            payload = "'from'=Telnyx_Phone &'to'=Phils-cell & 'body'='Fuck you! ~NDFGBot'"
-
-            conn = httplib.HTTPConnection("https://sms.telnyx.com/messages")
-            conn.request("POST", "", payload, headers)
-            response = conn.getresponse()
-            await message.channel.send(response)
-
+             payload = {
+             "from": Telnyx_Phone,
+             "to": Phils-cell,
+             "body": "Fuck you!"}
+             r = requests.post("https://sms.telnyx.com/messages", data=payload, headers=headers)
                                        
     elif message.content.startswith('!add'):
         member = message.mentions[0]
