@@ -42,7 +42,7 @@ async def on_message(message):
             
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
-            headers = {'x-profile-secret': Telnyx_SMS_Key &'Content-Type':'application/json'}
+            headers = {'x-profile-secret': Telnyx_SMS_Key, 'Content-Type':'application/json'}
             payload = "'from'=Telnyx_Phone &'to'=Phils-cell & 'body'='Fuck you! ~NDFGBot'"
 
             conn = httplib.HTTPConnection("https://sms.telnyx.com/messages")
