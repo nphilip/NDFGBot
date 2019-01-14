@@ -36,7 +36,7 @@ async def on_message(message):
             with message.channel.typing():
                 await message.channel.send('Message written using message.channel.send')
 
-    elif message.content.startswith('!phil-lightsoff):') # WIP - Turn off Phil's lights
+    elif message.content.startswith('!phil-lightsoff'):') # WIP - Turn off Phil's lights
             await message.channel.send('Sending lights off command to LIFX bulbs @ Phil')
 
     elif message.content.startswith('!add'):
