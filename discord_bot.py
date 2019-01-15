@@ -9,7 +9,7 @@ import requests # Required for building POST requests
 # https://github.com/Rapptz/discord.py/blob/async/examples/reply.py
 
 # Switches
-debug = False # Enables verbose outputs for diagnostics.
+debug = True # Enables verbose outputs for diagnostics.
 
 # Debug
 if debug == True:
