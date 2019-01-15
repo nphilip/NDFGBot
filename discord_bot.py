@@ -9,7 +9,7 @@ import requests # Required for building POST requests
 # https://github.com/Rapptz/discord.py/blob/async/examples/reply.py
 
 # Switches
-debug = True # Enables verbose outputs for diagnostics.
+debug = False # Enables verbose outputs for diagnostics.
 
 # Debug
 if debug == True:
@@ -52,7 +52,7 @@ async def on_message(message):
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
             headers = {'x-profile-secret': os.environ.get('Telnyx_SMS_Key'), 'Content-Type':'application/json'}
-            payload = {"from": os.environ.get('Telnyx_Phone'), "to": os.environ.get('Phils-cell'), "body": "Fuck you!"}
+            payload = {"\"from\"": os.environ.get('Telnyx_Phone'), "\"to\"": os.environ.get('Phils-cell'), "\"body\"": "\"Fuck you!\""}
             if debug == True:
                 print ("Printing var = payload:")
                 print (payload)
