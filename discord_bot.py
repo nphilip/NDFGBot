@@ -4,6 +4,7 @@
 import discord # Obviously, as a Discord Bot, an include is necessary for that portion
 import os # Required for pulling environment variables
 import requests # Required for building POST requests
+import json # Correctly format JSON
 
 # References
 # https://github.com/Rapptz/discord.py/blob/async/examples/reply.py
@@ -52,7 +53,7 @@ async def on_message(message):
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
             headers = {'x-profile-secret': os.environ.get('Telnyx_SMS_Key'), 'Content-Type':'application/json'}
-            payload = {"from": os.environ.get('Telnyx_Phone'), "to": os.environ.get('Phils-cell'), "body": "Fuck you!"}
+            payload = json.dumps({'from': os.environ.get('Telnyx_Phone'), 'to': os.environ.get('Phils-cell'), 'body': 'Fuck you!'})
             if debug == True:
                 print ("Printing var = payload:")
                 print (payload)
