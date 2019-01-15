@@ -60,7 +60,17 @@ async def on_message(message):
                 print ("Printing var = headers:")
                 print (headers)
             response = requests.post('https://sms.telnyx.com/messages', data=payload, headers=headers)
-            await message.channel.send(response.raise_for_status())
+
+    elif message.content.startswith('!fuckyou-lily'): # Send a meanie text message to Lily
+            await message.channel.send('Sending a fuck you to lily')
+            headers = {'x-profile-secret': os.environ.get('Telnyx_SMS_Key'), 'Content-Type':'application/json'}
+            payload = json.dumps({'from': os.environ.get('Telnyx_Phone'), 'to': os.environ.get('Lilys-cell'), 'body': 'Fuck you!'})
+            if debug == True:
+                print ("Printing var = payload:")
+                print (payload)
+                print ("Printing var = headers:")
+                print (headers)
+            response = requests.post('https://sms.telnyx.com/messages', data=payload, headers=headers)
                                        
     elif message.content.startswith('!add'):
         member = message.mentions[0]
