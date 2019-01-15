@@ -12,7 +12,7 @@ import requests # Required for building POST requests
 debug = True # Enables verbose outputs for diagnostics.
 
 # Debug
-if debug = True:
+if debug == True:
     print ('Running debug statements:')
     print (os.environ.get('DISCORD_BOT_KEY'))
     print (os.environ.get('LIFX_Key_Phil'))
