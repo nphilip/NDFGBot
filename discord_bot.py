@@ -43,9 +43,9 @@ async def on_message(message):
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
             headers = {'x-profile-secret': os.environ.get('Telnyx_SMS_Key'), 'Content-Type':'application/json'}
-            payload = {"from": os.environ.get('Telnyx_Phone'), "to": os.environ.get('Phils-cell'), "body": "Fuck you!"}
-            response = requests.post("https://sms.telnyx.com/messages", data=payload, headers=headers)
-            await message.channel.send(response)
+            payload = {'from': os.environ.get('Telnyx_Phone'), 'to': os.environ.get('Phils-cell'), 'body': 'Fuck you!'}
+            response = requests.post('https://sms.telnyx.com/messages', data=payload, headers=headers)
+            await message.channel.send(response.raise_for_status())
                                        
     elif message.content.startswith('!add'):
         member = message.mentions[0]
