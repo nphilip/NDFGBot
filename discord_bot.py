@@ -52,7 +52,12 @@ async def on_message(message):
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
             headers = {'x-profile-secret': os.environ.get('Telnyx_SMS_Key'), 'Content-Type':'application/json'}
-            payload = {'from': os.environ.get('Telnyx_Phone'), 'to': os.environ.get('Phils-cell'), 'body': 'Fuck you!'}
+            payload = {"from": os.environ.get('Telnyx_Phone'), "to": os.environ.get('Phils-cell'), "body": "Fuck you!"}
+            if debug == True:
+                print ("Printing var = payload:")
+                print (payload)
+                print ("Printing var = headers:")
+                print (headers)
             response = requests.post('https://sms.telnyx.com/messages', data=payload, headers=headers)
             await message.channel.send(response.raise_for_status())
                                        
