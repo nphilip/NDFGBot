@@ -47,8 +47,11 @@ async def on_message(message):
             with message.channel.typing():
                 await message.channel.send('Message written using message.channel.send')
 
-    elif message.content.startswith('!phil-lightsoff'): # WIP - Turn off Phil's lights
-            await message.channel.send('Sending lights off command to LIFX bulbs @ Phil')
+    elif message.content.startswith('!phil-lightstoggle'): # Toggle Phil's lights
+            await message.channel.send('Sending lights toggle command to LIFX bulbs @ Phil (all)')
+            token = os.environ.get('LIFX_Key_Phil')
+            response = requests.post('https://api.lifx.com/v1/lights/all/toggle', auth=(token, ''))
+            message.channel.send(response.json())
             
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
