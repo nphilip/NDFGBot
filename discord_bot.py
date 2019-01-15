@@ -11,6 +11,15 @@ import requests # Required for building POST requests
 # Switches
 debug = True # Enables verbose outputs for diagnostics.
 
+# Debug
+if debug = True:
+    print ('Running debug statements:')
+    print (os.environ.get('DISCORD_BOT_KEY'))
+    print (os.environ.get('LIFX_Key_Phil'))
+    print (os.environ.get('Phils-cell'))
+    print (os.environ.get('Telnyx_Phone'))
+    print (os.environ.get('Telnyx_SMS_Key'))
+
 client = discord.Client()
 tohangup = ""
 
