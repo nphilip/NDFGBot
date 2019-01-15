@@ -51,7 +51,7 @@ async def on_message(message):
             await message.channel.send('Sending lights toggle command to LIFX bulbs @ Phil (all)')
             token = os.environ.get('LIFX_Key_Phil')
             response = requests.post('https://api.lifx.com/v1/lights/all/toggle', auth=(token, ''))
-            await message.channel.send(response.json)
+            await message.channel.send(response.text)
             
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
@@ -63,7 +63,7 @@ async def on_message(message):
                 print ("Printing var = headers:")
                 print (headers)
             response = requests.post('https://sms.telnyx.com/messages', data=payload, headers=headers)
-            await message.channel.send(response.json)
+            await message.channel.send(response.text)
 
     elif message.content.startswith('!fuckyou-lily'): # Send a meanie text message to Lily
             await message.channel.send('Sending a fuck you to lily')
@@ -75,7 +75,7 @@ async def on_message(message):
                 print ("Printing var = headers:")
                 print (headers)
             response = requests.post('https://sms.telnyx.com/messages', data=payload, headers=headers)
-            await message.channel.send(response.json)
+            await message.channel.send(response.text)
                                        
     elif message.content.startswith('!add'):
         member = message.mentions[0]
