@@ -62,7 +62,7 @@ async def on_message(message):
                     "brightness" : "100",
                     "power": "on",
                     }
-                response = requests.post('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
+                response = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
                 await message.channel.send(response.text)
 
     elif message.content.startswith('!phil-lightsoff'):
@@ -72,7 +72,7 @@ async def on_message(message):
                 payload = {
                     "power" : "off"
                 }
-                response = requests.post('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
+                response = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
                 await message.channel.send(response.text)
             
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
