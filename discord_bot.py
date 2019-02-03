@@ -24,7 +24,7 @@ if debug == True:
 client = discord.Client()
 tohangup = ""
 
-client.run(os.environ.get('DISCORD_BOT_KEY')) # NO HARDCODED TOKENS, LILY.
+
 
 # Bot Execution
 @client.event
@@ -185,3 +185,4 @@ async def on_message(message):
 #                    return await x.disconnect()
 #            return await client.say("NO")
 
+client.run(os.environ.get('DISCORD_BOT_KEY')) # NO HARDCODED TOKENS, LILY.
