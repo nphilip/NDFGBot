@@ -58,14 +58,14 @@ async def on_message(message):
                 await message.channel.send("Changing lights to try and stay the fuck awake.")
                 token = os.environ.get('LIFX_Key_Phil')
                 payload = {
-                    "color": "kelvin:9000"
-                    "brightness": "100"
+                    "color": "kelvin:9000",
+                    "brightness" : "100",
                     "power": "on",
                     }
-                response = requests.post('https://api.lifx.com/v1/lights/all/state', data=payload, {"Authorization": "Bearer %s" % token,})
+                response = requests.post('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
                 await message.channel.send(response.text)
 
-    elif message.content.startswith('!phil-lightsoff')
+    elif message.content.startswith('!phil-lightsoff'):
         with message.channel.typing():
                 await message.channel.send("Night-night time.")
                 token = os.environ.get('LIFX_Key_Phil')
