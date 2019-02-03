@@ -46,6 +46,7 @@ async def on_message(message):
             token = os.environ.get('LIFX_Key_Phil')
             response = requests.post('https://api.lifx.com/v1/lights/all/toggle', auth=(token, ''))
         await message.channel.send(response.text)
+        print response.text
 
     if message.content.startswith('!phil-getlights'):
             await message.channel.send('Getting lights status')
