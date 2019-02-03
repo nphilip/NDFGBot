@@ -33,8 +33,8 @@ async def on_ready():
     print('Client UserID: ', client.user.id)
     print('------')
 
-@client.event
-async def on_connect(message):
+#@client.event
+#    async def on_connect(message):
 
 # Body
 @client.event
