@@ -30,6 +30,7 @@ async def on_ready():
     print('Client UserID: ', client.user.id)
     print('------')
 
+@client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
