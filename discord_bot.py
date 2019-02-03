@@ -22,64 +22,58 @@ if debug == True:
     print (os.environ.get('Telnyx_SMS_Key'))
 
 client = discord.Client()
-tohangup = ""
 
-
-
-# Bot Execution
 @client.event
 async def on_ready():
+    print('------')
     print('Logged in as', client.user.name,)
     print('Client UserID: ', client.user.id)
     print('------')
 
-#@client.event
-#    async def on_connect(message):
-
-# Body
-@client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
 
     if message.content.startswith('!test-new'): # Test code using rewrite branch method
-            with message.channel.typing():
-                await message.channel.send('Message written using message.channel.send')
+        with message.channel.typing():
+            await message.channel.send('Message written using message.channel.send')
 
     if message.content.startswith('!phil-lightstoggle'): # Toggle Phil's lights
-            await message.channel.send('Sending lights toggle command to LIFX bulbs @ Phil (all)')
+        await message.channel.send('Sending lights toggle command to LIFX bulbs @ Phil (all)')
+        with message.channel.typing():
             token = os.environ.get('LIFX_Key_Phil')
             response = requests.post('https://api.lifx.com/v1/lights/all/toggle', auth=(token, ''))
-            await message.channel.send(response.text)
+        await message.channel.send(response.text)
 
     if message.content.startswith('!phil-getlights'):
             await message.channel.send('Getting lights status')
-            token = os.environ.get('LIFX_Key_Phil')
-            response = requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
+            with message.channel.typing():
+                token = os.environ.get('LIFX_Key_Phil')
+                response = requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
             await message.channel.send(response.text)
 
     if message.content.startswith('!phil-programmingmode'):
-            with message.channel.typing():
-                await message.channel.send("Changing lights to try and stay the fuck awake.")
-                token = os.environ.get('LIFX_Key_Phil')
-                payload = {
-                    "color": "kelvin:9000",
-                    "brightness" : "100",
-                    "power": "on",
-                    }
-                response = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
-                await message.channel.send(response.text)
+        await message.channel.send("Changing lights to try and stay the fuck awake.")
+        with message.channel.typing():
+            token = os.environ.get('LIFX_Key_Phil')
+            payload = {
+                "color": "kelvin:9000",
+                "brightness" : "100",
+                "power": "on",
+                }
+            response = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
+        await message.channel.send(response.text)
 
     if message.content.startswith('!phil-lightsoff'):
         with message.channel.typing():
-                await message.channel.send("Night-night time.")
-                token = os.environ.get('LIFX_Key_Phil')
-                payload = {
-                    "power" : "off"
-                }
-                response = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
-                await message.channel.send(response.text)
+            await message.channel.send("Night-night time.")
+            token = os.environ.get('LIFX_Key_Phil')
+            payload = {
+                "power" : "off"
+            }
+            response = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
+            await message.channel.send(response.text)
             
     if message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
