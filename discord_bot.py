@@ -56,7 +56,7 @@ async def on_message(message):
     elif message.content.startswith('!phil-getlights'):
             await message.channel.send('Getting lights status')
             token = os.environ.get('LIFX_Key_Phil')
-            response = requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
+            response = requests.post('https://api.lifx.com/v1/lights/all', auth=(token, ''))
             await message.channel.send(response.text)
 
     elif message.content.startswith('!phil-programmingmode'):
