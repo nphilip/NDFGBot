@@ -10,7 +10,7 @@ import json # Correctly format JSON
 # https://github.com/Rapptz/discord.py/blob/async/examples/reply.py
 
 # Switches
-debug = True # Enables verbose outputs for diagnostics.
+debug = False # Enables verbose outputs for diagnostics.
 
 # Debug
 if debug == True:
