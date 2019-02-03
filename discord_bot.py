@@ -69,7 +69,10 @@ async def on_message(message):
         with message.channel.typing():
                 await message.channel.send("Night-night time.")
                 token = os.environ.get('LIFX_Key_Phil')
-                response = requests.post('https://api.lifx.com/v1/lights/all/off', auth=(token, ''))
+                payload = {
+                    "power" : "off"
+                }
+                response = requests.post('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
                 await message.channel.send(response.text)
             
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
