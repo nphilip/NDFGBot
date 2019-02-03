@@ -31,6 +31,12 @@ async def on_ready():
     print('------')
 
 @client.event
+async def on_connect():
+    print('------')
+    print('Connected')
+    print('------')
+
+@client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
@@ -46,8 +52,8 @@ async def on_message(message):
             token = os.environ.get('LIFX_Key_Phil')
             response = requests.post('https://api.lifx.com/v1/lights/all/toggle', auth=(token, ''))
         await message.channel.send(response.text)
-        print response.text
-
+        print (response.text)
+        
     if message.content.startswith('!phil-getlights'):
             await message.channel.send('Getting lights status')
             with message.channel.typing():
