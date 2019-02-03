@@ -52,6 +52,25 @@ async def on_message(message):
             token = os.environ.get('LIFX_Key_Phil')
             response = requests.post('https://api.lifx.com/v1/lights/all/toggle', auth=(token, ''))
             await message.channel.send(response.text)
+
+    elif message.content.startswith('!phil-programmingmode'):
+            with message.channel.typing():
+                await message.channel.send("Changing lights to try and stay the fuck awake.")
+                token = os.environ.get('LIFX_Key_Phil')
+                payload = {
+                    "color": "kelvin:9000"
+                    "brightness": "100"
+                    "power": "on",
+                    }
+                response = requests.post('https://api.lifx.com/v1/lights/all/state', data=payload, {"Authorization": "Bearer %s" % token,})
+                await message.channel.send(response.text)
+
+    elif message.content.startswith('!phil-lightsoff')
+        with message.channel.typing():
+                await message.channel.send("Night-night time.")
+                token = os.environ.get('LIFX_Key_Phil')
+                response = requests.post('https://api.lifx.com/v1/lights/all/off', auth=(token, ''))
+                await message.channel.send(response.text)
             
     elif message.content.startswith('!fuckyou-phil'): # Send a meanie text message to Phil
             await message.channel.send('Sending a fuck you to Phil')
@@ -66,7 +85,7 @@ async def on_message(message):
             await message.channel.send(response.text)
 
     elif message.content.startswith('!fuckyou-lily'): # Send a meanie text message to Lily
-            await message.channel.send('Sending a fuck you to lily')
+            await message.channel.send('Sending a fuck you to Lily')
             headers = {'x-profile-secret': os.environ.get('Telnyx_SMS_Key'), 'Content-Type':'application/json'}
             payload = json.dumps({'from': os.environ.get('Telnyx_Phone'), 'to': os.environ.get('Lilys-cell'), 'body': 'Fuck you!'})
             if debug == True:
