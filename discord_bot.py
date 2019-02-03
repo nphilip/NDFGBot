@@ -24,6 +24,19 @@ if debug == True:
 client = discord.Client()
 tohangup = ""
 
+client.run(os.environ.get('DISCORD_BOT_KEY')) # NO HARDCODED TOKENS, LILY.
+
+# Bot Execution
+@client.event
+async def on_ready():
+    print('Logged in as', client.user.name,)
+    print('Client UserID: ', client.user.id)
+    print('------')
+
+@client.event
+async def on_connect(message):
+
+# Body
 @client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
@@ -56,7 +69,7 @@ async def on_message(message):
     elif message.content.startswith('!phil-getlights'):
             await message.channel.send('Getting lights status')
             token = os.environ.get('LIFX_Key_Phil')
-            response = requests.post('https://api.lifx.com/v1/lights/all', auth=(token, ''))
+            response = requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
             await message.channel.send(response.text)
 
     elif message.content.startswith('!phil-programmingmode'):
@@ -172,11 +185,3 @@ async def on_message(message):
 #                    return await x.disconnect()
 #            return await client.say("NO")
 
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
-
-client.run(os.environ.get('DISCORD_BOT_KEY')) # NO HARDCODED TOKENS, LILY.
