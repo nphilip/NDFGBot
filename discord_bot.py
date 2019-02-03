@@ -53,6 +53,11 @@ async def on_message(message):
             response = requests.post('https://api.lifx.com/v1/lights/all/toggle', auth=(token, ''))
             await message.channel.send(response.text)
 
+    elif message.content.startswith('!phil-getlights'):
+            await message.channel.send('Getting lights status')
+            token = os.environ.get('LIFX_Key_Phil')
+            response = requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
+
     elif message.content.startswith('!phil-programmingmode'):
             with message.channel.typing():
                 await message.channel.send("Changing lights to try and stay the fuck awake.")
