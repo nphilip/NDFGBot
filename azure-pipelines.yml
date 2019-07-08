@@ -18,7 +18,13 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
   
-- task: PythonScript@0
+- task: AzureRmWebAppDeployment@4
   inputs:
-    scriptSource: 'filePath'
-    scriptPath: 'discord_bot.py'
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure DevOps RG'
+    appType: 'webAppLinux'
+    WebAppName: 'ndfgbot'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'PYTHON|3.7'
+    StartupCommand: 'discord_bot.py'
+    ScriptType: 'File Path'
